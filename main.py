@@ -10,7 +10,7 @@ from email_mei.valid_email import is_valid_email
 MAIN_DIR = r'C:\Users\miria\OneDrive\Área de Trabalho\mbk-email-mei-projeto'
 HISTORY_FILE = os.path.join(MAIN_DIR, "email_history.csv")
 
-caminho_arquivo = os.path.join(MAIN_DIR, 'clients', 'empresas_florianopolis_teste.csv')
+caminho_arquivo = os.path.join(MAIN_DIR, 'clients', 'Base_teste_camboriu.csv')
 clients_df = load_and_clean_data(caminho_arquivo)
 client_data = display_and_iterate(clients_df)
 print(client_data)
@@ -24,5 +24,5 @@ if is_valid_email(email_cliente):
         EMAIL_ADDRESS = os.getenv("EMAIL_ADDRESS")
         PWD = os.getenv("PWD")
         email_mbk = Email(EMAIL_ADDRESS, PWD)
-        email_mbk.send(email_cliente, nome_cliente, cidade_cliente)
+        email_mbk.send(client_data)
         update_history(HISTORY_FILE, email_cliente)

@@ -15,8 +15,9 @@ class Email:
         self.sender = sender
         self.password = password
 
-    def send(self, client_email, client_name, client_city, retries=3):
+    def send(self, client_data, retries=3):
         retries = int(retries)
+        client_email, client_name, client_city = client_data
         for attempt in range(retries):
             try:
                 msg = MIMEMultipart()
@@ -31,27 +32,27 @@ class Email:
                     <head>
                         <meta charset="UTF-8">
                         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-                        <title>Notificação de Exclusão MEI</title>
+                        <title>Notificação de' Exclusão MEI</title>
                         <style>
                             body {{
                                 font-family: Arial, sans-serif;
                                 color: #333;
                                 line-height: 1.6;
-                                background-color: #f9f9f9;
+                                background-color: #ffffff;
                                 padding: 0;
                                 margin: 0;
                             }}
                             .container {{
                                 max-width: 600px;
                                 margin: 20px auto;
-                                background: #ffffff;
+                                background: #f9f9f9;
                                 border: 1px solid #ddd;
                                 border-radius: 10px;
                                 box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
                                 overflow: hidden;
                             }}
                             .header {{
-                                background-color: #4CAF50;
+                                background-color: #000000;
                                 color: white;
                                 text-align: center;
                                 padding: 20px;
@@ -69,7 +70,7 @@ class Email:
                                 margin: 20px 0;
                             }}
                             .cta a {{
-                                background-color: #4CAF50;
+                                background-color: #c3222a;
                                 color: white;
                                 text-decoration: none;
                                 padding: 10px 20px;
@@ -77,10 +78,10 @@ class Email:
                                 font-weight: bold;
                             }}
                             .cta a:hover {{
-                                background-color: #45a049;
+                                background-color: #c3222a;
                             }}
                             .footer {{
-                                background-color: #f1f1f1;
+                                background-color: #ffffff;
                                 text-align: center;
                                 padding: 20px;
                                 font-size: 0.9em;
@@ -112,7 +113,7 @@ class Email:
                                     <strong>Mas como regularizar sua situação agora?</strong>
                                 </p>
                                 <p>
-                                    Acesse o <a href="" target="_blank">Portal do MEI</a>, preencha a <strong>DASN-MEI</strong> e faça o envio da declaração.
+                                    Acesse o Portal do MEI, preencha a <strong>DASN-MEI</strong> e faça o envio da declaração.
                                 </p>
                                 <p>
                                     Simples, não? Mas para empreendedores como você, o tempo vale o dobro... E nós sabemos disso.
@@ -124,7 +125,7 @@ class Email:
                                     Evite complicações: simplifique com a <strong>MBK MEI</strong> e dedique seu tempo ao que realmente importa para o seu negócio.
                                 </p>
                                 <div class="cta">
-                                    <a href="" target="_blank">👉 Chame no WhatsApp</a>
+                                    <a href="https://wa.me/554184443380" target="_blank">👉 Chame no WhatsApp</a>
                                 </div>
                             </div>
                             <div class="footer">
@@ -135,7 +136,7 @@ class Email:
                                 <p>
                                     <img src="https://ci3.googleusercontent.com/mail-sig/AIorK4wH-bUT5TfOrAlZ5z6Qv74MLUwFzmsShtYX7Zw4HuIUWWqn2QushlYpXeySgH_Wx1qoMwv-irw" alt="MBK Logo" width="200">
                                 </p>
-                                <p style="background-color: #eee; padding: 10px; font-size: 0.8em; font-style: italic; border-radius: 5px;">
+                                <p style="background-color: #ffffff; padding: 10px; font-size: 0.8em; font-style: italic; border-radius: 5px;">
                                     Este e-mail é confidencial e destinado apenas ao destinatário. Caso tenha recebido por engano, notifique-nos imediatamente e exclua a mensagem.
                                 </p>
                             </div>

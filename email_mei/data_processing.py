@@ -1,17 +1,23 @@
 import pandas as pd
 def load_and_clean_data(file_path):
     """
-    Carrega informações de clientes de um arquivo CSV que possuem 'opcap_pelo_mei'como True.
-    
-    Remover os dados NaN da coluna "email" e trata os dados da coluna "razao_social".
+        Carrega e filtra os dados do arquivo csv informado.
     """
     try:
-        clients_df = pd.read_csv(file_path, encoding='latin1', usecols=['email', 'municipio', 'razao_social', 'opcao_pelo_mei'])
-        # Filter for MEI option
-        clients_df = clients_df.loc[clients_df['opcao_pelo_mei'] == True, :]
-        # Drop rows with NaN in 'email'
-        clients_df = clients_df.dropna(subset=['email'])
-        clients_df['razao_social'] = clients_df['razao_social'].str.replace(r'[^a-zA-Z\s]', '', regex=True).str.strip()
+        # Carregar apenas as colunas necessárias
+        clients_df = pd.read_csv(
+            file_path,
+            encoding='latin1',
+            usecols=['email', 'municipio', 'razao_social', 'descricao_situacao_cadastral'],
+            quotechar='"',
+            escapechar='\\',
+            skipinitialspace=True
+        )
+        
+        # Limpar quebras de linha e espaços em branco nas colunas selecionadas
+        for col in clients_df.columns:
+            clients_df[col] = clients_df[col].astype(str).str.replace('\n', ' ').str.replace('\r', ' ').str.strip()
+
         return clients_df
     except Exception as e:
         print(f"Erro ao filtrar os dados: {e}")
@@ -24,9 +30,10 @@ def display_and_iterate(data):
     try:
         for index, row in data.iterrows():
             client_email = row['email']
-            client_name = row['razao_social']
             client_city = row['municipio']
-            client_data = client_email, client_name, client_city
+            client_name = row['razao_social']
+            client_situation = row['descricao_situacao_cadastral']
+            client_data = client_email, client_city, client_name, client_situation
         
 
         return client_data
