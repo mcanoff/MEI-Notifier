@@ -2,155 +2,58 @@ import os
 import time
 import smtplib
 import pandas as pd
-import email.message
 from dotenv import load_dotenv
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from email.mime.application import MIMEApplication
 from datetime import datetime, timedelta
 
-# Criar a classe que envia os emails
 class Email:
     def __init__(self, sender, password):
         self.sender = sender
         self.password = password
+        self.corp_email_files = {
+            'ATIVO': 'ativo.txt',
+            'SUSPENSO': 'suspenso.txt',
+            'BAIXADO': 'baixado.txt',
+            'INAPTO': 'inapto.txt'
+        }
 
-    def send(self, client_data, retries=3):
+    def load_email_body(self, client_situation):
+            """
+            """
+            client_situation = str(client_situation.lower())
+            SCRIPT_DIR = r"C:\Users\miria\OneDrive\Área de Trabalho\mbk-email-mei-projeto\email_mei"
+            # arquivo_email_body = self.corp_email_files.get(client_situation)
+            caminho_email_body = os.path.join(SCRIPT_DIR, f'{client_situation}.txt')
+            if os.path.exists(caminho_email_body):
+                with open(caminho_email_body , 'r', encoding='utf-8') as file:
+                    email_body = file.read()
+                    return email_body
+            else:
+                print(f"Corpo de e-mail não encontrado para a situação: {client_situation}.")
+                return None
+
+    def send(self, client_email, client_city, client_name, email_body, retries=3):
+        """
+        """
         retries = int(retries)
-        client_email, client_name, client_city = client_data
         for attempt in range(retries):
             try:
+
                 msg = MIMEMultipart()
                 msg['From'] = self.sender
                 msg['To'] = client_email
                 msg['Subject'] = "RECEITA FEDERAL NOTIFICA EXCLUSÃO DE MEIs - Regularize o seu!"
                 msg['Cc'] = 'mcanoff16@gmail.com'
 
-                email_body = f"""
-                    <!DOCTYPE html>
-                    <html lang="pt-BR">
-                    <head>
-                        <meta charset="UTF-8">
-                        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-                        <title>Notificação de' Exclusão MEI</title>
-                        <style>
-                            body {{
-                                font-family: Arial, sans-serif;
-                                color: #333;
-                                line-height: 1.6;
-                                background-color: #ffffff;
-                                padding: 0;
-                                margin: 0;
-                            }}
-                            .container {{
-                                max-width: 600px;
-                                margin: 20px auto;
-                                background: #f9f9f9;
-                                border: 1px solid #ddd;
-                                border-radius: 10px;
-                                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-                                overflow: hidden;
-                            }}
-                            .header {{
-                                background-color: #000000;
-                                color: white;
-                                text-align: center;
-                                padding: 20px;
-                                font-size: 1.5em;
-                            }}
-                            .content {{
-                                padding: 20px;
-                            }}
-                            .content p {{
-                                margin-bottom: 15px;
-                                text-align: justify; /* Adiciona justificação aos parágrafos */
-                            }}
-                            .cta {{
-                                text-align: center;
-                                margin: 20px 0;
-                            }}
-                            .cta a {{
-                                background-color: #c3222a;
-                                color: white;
-                                text-decoration: none;
-                                padding: 10px 20px;
-                                border-radius: 5px;
-                                font-weight: bold;
-                            }}
-                            .cta a:hover {{
-                                background-color: #c3222a;
-                            }}
-                            .footer {{
-                                background-color: #ffffff;
-                                text-align: center;
-                                padding: 20px;
-                                font-size: 0.9em;
-                                color: #777;
-                            }}
-                            .footer p {{
-                                margin: 5px 0;
-                            }}
-                            .footer a {{
-                                color: #0056b3;
-                                text-decoration: none;
-                            }}
-                        </style>
-                    </head>
-                    <body>
-                        <div class="container">
-                            <div class="header">
-                                Notificação de Exclusão MEI
-                            </div>
-                            <div class="content">
-                                <p>Prezado(a) <strong>{client_name}</strong>,</p>
-                                <p>
-                                    A Receita Federal enviou uma <strong>NOTIFICAÇÃO DE EXCLUSÃO</strong> para 1,1 milhão de Microempreendedores Individuais em todo o Brasil — e um deles é você.
-                                </p>
-                                <p>
-                                    ⚠ <strong>Atenção:</strong> A exclusão do regime MEI implica no pagamento de mais impostos, custos com contador e uma série de outras obrigações que, se não regularizadas, podem afetar diretamente seu CPF como sócio.
-                                </p>
-                                <p>
-                                    <strong>Mas como regularizar sua situação agora?</strong>
-                                </p>
-                                <p>
-                                    Acesse o Portal do MEI, preencha a <strong>DASN-MEI</strong> e faça o envio da declaração.
-                                </p>
-                                <p>
-                                    Simples, não? Mas para empreendedores como você, o tempo vale o dobro... E nós sabemos disso.
-                                </p>
-                                <p>
-                                    Por isso, se você quer ter sua empresa regularizada, entre em contato com nossos especialistas da <strong>MBK MEI</strong>, o braço da MBK - Grupo de Serviços Empresariais focado em otimizar resultados de microempreendedores em <strong>{client_city}</strong>.
-                                </p>
-                                <p>
-                                    Evite complicações: simplifique com a <strong>MBK MEI</strong> e dedique seu tempo ao que realmente importa para o seu negócio.
-                                </p>
-                                <div class="cta">
-                                    <a href="https://wa.me/554184443380" target="_blank">👉 Chame no WhatsApp</a>
-                                </div>
-                            </div>
-                            <div class="footer">
-                                <p><strong>Bruno Fey</strong><br>Diretor - MBK Contabilidade</p>
-                                <p>"Simplificando processos burocráticos há 30 anos."</p>
-                                <p>Tel: <a href="tel:+5541984443380">(41) 98444-3380</a></p>
-                                <p>E-mail: <a href="mailto:contato@mbkcontabilidade.com">contato@mbkcontabilidade.com</a></p>
-                                <p>
-                                    <img src="https://ci3.googleusercontent.com/mail-sig/AIorK4wH-bUT5TfOrAlZ5z6Qv74MLUwFzmsShtYX7Zw4HuIUWWqn2QushlYpXeySgH_Wx1qoMwv-irw" alt="MBK Logo" width="200">
-                                </p>
-                                <p style="background-color: #ffffff; padding: 10px; font-size: 0.8em; font-style: italic; border-radius: 5px;">
-                                    Este e-mail é confidencial e destinado apenas ao destinatário. Caso tenha recebido por engano, notifique-nos imediatamente e exclua a mensagem.
-                                </p>
-                            </div>
-                        </div>
-                    </body>
-                    </html>
-                    """
+                corpo_email = email_body.format(client_name=client_name, client_city=client_city)
 
+                msg.attach(MIMEText(corpo_email, 'html'))
                 # anexar arquivos de anexo, caso precise
-                caminho_arquivo = r"Anexo/test_file.txt"
-                with open(caminho_arquivo, "rb") as arquivo:
-                    msg.attach(MIMEApplication(arquivo.read(), Name="Anexo teste"))
-
-                msg.attach(MIMEText(email_body, 'html'))
+                # caminho_arquivo = r"Anexo/test_file.txt"
+                # with open(caminho_arquivo, "rb") as arquivo:
+                #     msg.attach(MIMEApplication(arquivo.read(), Name="Anexo teste"))
 
                 server = smtplib.SMTP('smtp.gmail.com', 587)
                 server.ehlo()

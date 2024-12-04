@@ -10,9 +10,8 @@ class Email:
         self.remetente = remetente
         self.nome_remetente = nome_remetente
 
-    def send(self, client_data, retries=3):
+    def send(self, client_email, client_city, client_name, client_situation, retries=3):
         retries = int(retries)
-        client_email, client_name, client_city = client_data
         
         for attempt in range(retries):
             try:
@@ -47,7 +46,7 @@ class Email:
                     "mensagemEncoding": "quoted-printable",
                     "mensagemAlt": "Notificação de Exclusão MEI",
                 }
-
+                # transformar as informações do cliente (dicionário data) em um json.
                 # Chamada à API
                 response = requests.post(self.api_url, headers=headers, json=data)
 

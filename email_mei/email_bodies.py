@@ -61,8 +61,6 @@ suspenso = """
 </html>
 
 """
-
-
 inapto = """
 <!DOCTYPE html>
 <html lang="pt-BR">
