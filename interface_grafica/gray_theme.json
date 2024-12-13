@@ -1,0 +1,81 @@
+{
+    "CTk": {
+      "fg_color": ["#f0f0f0", "#1e1e1e"],
+      "bg_color": ["#d9d9d9", "#333333"],
+      "text_color": ["#333333", "#d9d9d9"]
+    },
+    "CTkFont": {
+      "family": "Arial",
+      "size": 14,
+      "weight": "normal"
+    },
+    "CTkButton": {
+      "fg_color": ["#b00020", "#800015"],
+      "hover_color": ["#c51130", "#99001a"],
+      "border_color": ["#000000", "#ffffff"],
+      "text_color": ["#ffffff", "#ffffff"],
+      "text_color_disabled": ["#888888", "#666666"],
+      "corner_radius": 10,
+      "border_width": 2,
+      "border_spacing": 4,
+      "font": "CTkFont"
+    },
+    "CTkLabel": {
+      "fg_color": ["#d9d9d9", "#333333"],
+      "text_color": ["#333333", "#d9d9d9"],
+      "font": "CTkFont",
+      "corner_radius": 8
+    },
+    "CTkEntry": {
+      "fg_color": ["#ffffff", "#4d4d4d"],
+      "text_color": ["#333333", "#d9d9d9"],
+      "placeholder_text_color": ["#999999", "#666666"],
+      "border_color": ["#888888", "#444444"],
+      "border_width": 2,
+      "font": "CTkFont"
+    },
+    "CTkProgressBar": {
+      "fg_color": ["#e0e0e0", "#4d4d4d"],
+      "progress_color": ["#b00020", "#800015"],
+      "border_color": ["#000000", "#ffffff"],
+      "border_width": 2
+    },
+    "CTkSlider": {
+      "fg_color": ["#d9d9d9", "#333333"],
+      "button_color": ["#b00020", "#800015"],
+      "progress_color": ["#c51130", "#99001a"],
+      "border_color": ["#000000", "#ffffff"],
+      "border_width": 2
+    },
+    "CTkCheckBox": {
+      "fg_color": ["#ffffff", "#4d4d4d"],
+      "hover_color": ["#c51130", "#99001a"],
+      "checkmark_color": ["#b00020", "#800015"],
+      "border_color": ["#000000", "#ffffff"],
+      "text_color": ["#333333", "#d9d9d9"],
+      "font": "CTkFont"
+    },
+    "CTkRadioButton": {
+      "fg_color": ["#ffffff", "#4d4d4d"],
+      "hover_color": ["#c51130", "#99001a"],
+      "checkmark_color": ["#b00020", "#800015"],
+      "border_color": ["#000000", "#ffffff"],
+      "text_color": ["#333333", "#d9d9d9"],
+      "font": "CTkFont"
+    },
+    "CTkSwitch": {
+      "fg_color": ["#ffffff", "#4d4d4d"],
+      "progress_color": ["#b00020", "#800015"],
+      "button_color": ["#c51130", "#99001a"],
+      "border_color": ["#000000", "#ffffff"],
+      "text_color": ["#333333", "#d9d9d9"],
+      "font": "CTkFont"
+    },
+    "CTkFrame": {
+        "fg_color": "#FFFFFF",
+        "border_color": "#FFFFFF",
+        "border_width": 1,
+        "corner_radius": 0
+    }
+  }
+  

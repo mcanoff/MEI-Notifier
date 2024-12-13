@@ -91,7 +91,7 @@
                                     Simples, não? Mas para empreendedores como você, o tempo vale o dobro... E nós sabemos disso.
                                 </p>
                                 <p>
-                                    Por isso, se você quer ter sua empresa regularizada sem dor de cabeça, entre em contato pelo WhatsApp com nossos especialistas da <strong>MBK MEI</strong>, o braço da MBK - Grupo de Serviços Empresariais focado em otimizar resultados de microempreendedores em <strong>[NOME DA CIDADE]</strong>.
+                                    Por isso, se você quer ter sua empresa regularizada sem dor de cabeça, entre em contato pelo WhatsApp com nossos especialistas da <strong>MBK MEI</strong>, o braço da MBK - Grupo de Serviços Empresariais focado em otimizar resultados de microempreendedores em <strong>{client_city}</strong>.
                                 </p>
                                 <p>
                                     Evite complicações: simplifique com a <strong>MBK MEI</strong> e dedique seu tempo ao que realmente importa para o seu negócio.

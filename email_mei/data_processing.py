@@ -2,9 +2,17 @@ import pandas as pd
 import os
 
 def load_and_clean_data(file_path):
+
     """
-        Carrega e filtra os dados do arquivo CSV informado.
+    Carrega e limpa dados de um arquivo CSV.
+
+    Parâmetros:
+        file_path (str): Caminho para o arquivo CSV.
+
+    Retorna:
+        pd.DataFrame: DataFrame com os dados limpos ou vazio em caso de erro.
     """
+
     if not os.path.exists(file_path): 
         print(f"Arquivo não encontrado: {file_path}")
         return pd.DataFrame()
@@ -34,6 +42,12 @@ def load_and_clean_data(file_path):
                     .str.replace('\n', ' ', regex=False) \
                     .str.replace('\r', ' ', regex=False) \
                     .str.strip()
+
+        # Remover números e CPFs da coluna 'razao_social'
+        clients_df['razao_social'] = clients_df['razao_social'].str.replace(r'\b\d{11}\b', '', regex=True)
+        clients_df['razao_social'] = clients_df['razao_social'].str.replace(r'\d{3}\.\d{3}\.\d{3}-\d{2}', '', regex=True) 
+        clients_df['razao_social'] = clients_df['razao_social'].str.replace(r'\d+', '', regex=True)
+        clients_df['razao_social'] = clients_df['razao_social'].str.strip()  
 
         return clients_df
 

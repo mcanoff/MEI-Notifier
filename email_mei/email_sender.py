@@ -45,7 +45,7 @@ class Email:
                 msg['From'] = self.sender
                 msg['To'] = client_email
                 msg['Subject'] = "RECEITA FEDERAL NOTIFICA EXCLUSÃO DE MEIs - Regularize o seu!"
-                msg['Cc'] = 'mcanoff16@gmail.com'
+                msg['Cc'] = ''
 
                 corpo_email = email_body.format(client_name=client_name, client_city=client_city)
 

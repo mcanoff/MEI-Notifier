@@ -104,7 +104,7 @@
                                     Por isso, nós queremos te ajudar a regularizar seu MEI.
                                 </p>
                                 <p>
-                                    Para ter a empresa totalmente regularizada sem dor de cabeça, entre em contato pelo WhatsApp com nossos especialistas da <strong>MBK MEI</strong>, o braço da MBK - Grupo de Serviços Empresariais focado em otimizar resultados de microempreendedores em <strong>[NOME DA CIDADE]</strong>.
+                                    Para ter a empresa totalmente regularizada sem dor de cabeça, entre em contato pelo WhatsApp com nossos especialistas da <strong>MBK MEI</strong>, o braço da MBK - Grupo de Serviços Empresariais focado em otimizar resultados de microempreendedores em <strong>{client_city}</strong>.
                                 </p>
                                 <p>
                                     Evite complicações: simplifique com a <strong>MBK MEI</strong> e dedique seu tempo ao que realmente importa para o seu negócio.

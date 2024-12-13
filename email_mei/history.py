@@ -32,21 +32,26 @@ def update_history(history_file, client_email):
     except Exception as e:
         print(f"Erro ao atualizar o histórico: {e}")
 
-# criar função para verificar se o e-mail já foi enviado nos últimos 30 dias
 def can_send_email(history_file, client_email):
     """
-    Verifica se o e-mail do cliente está no histórico de envio de e-mails nos últimos 30 dias.
+    Verifica se é permitido enviar um e-mail para um cliente com base no histórico de envios.
+
+    Parâmetros:
+        history_file (str): Caminho para o arquivo CSV contendo o histórico de envios.
+        client_email (str): Endereço de e-mail do cliente a ser verificado.
+
+    Retorna:
+        bool: True se o envio for permitido, False caso contrário.
     """
     
     # Verifica se o arquivo existe e não está vazio
     if os.path.exists(history_file) and os.stat(history_file).st_size > 0:
         df = pd.read_csv(history_file, encoding='latin1')
     else:
-        # Se o arquivo não existe ou está vazio, assume que pode enviar
         return True
 
     # Converte a coluna 'Data' para datetime
-    df['Data'] = pd.to_datetime(df['Data'], format='%Y-%m-%d', errors='coerce')
+    df['Data'] = pd.to_datetime(df['Data'], format='%Y-%m-%d', errors='coerce') 
 
     # Define o limite de 30 dias
     date_limit = datetime.now() - timedelta(days=30)
